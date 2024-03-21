@@ -1,15 +1,49 @@
 // pages/api/movie/[idMovie].js
 import clientPromise from "../../../lib/mongodb";
 import {ObjectId} from "mongodb";
-import OrmService from "../../../services/ormService";
-import ormService from "../../../services/ormService";
-import {useSearchParams} from "next/navigation";
 
+
+/**
+ * @swagger
+ * /api/movies/{idMovie}:
+ *   get:
+ *     description: Returns the movies with the [idMovie]
+ *     parameters:
+ *       - in: path
+ *         name: idMovie
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: ID movie
+ *     responses:
+ *       200:
+ *         description: Hello Movies
+ *       404:
+ *         description: Movie's not found
+ *       405:
+ *         description: Wrong HTTP Method
+ *   put:
+ *     requestBody:
+ *       description: Endpoint for modify a movie
+ *       content:
+ *         application/x-www-form-urlencoded:
+ *           schema:
+ *             type: object
+ *           description:
+ *     responses:
+ *       201:
+ *         description: Movies infos
+ *       404:
+ *         description: Movie's not found
+ *       405:
+ *         description: Wrong HTTP Method
+ *
+ */
 export default async function handler(req, res) {
     const { idMovie } = req.query;
     const client = await clientPromise;
     const db = client.db("sample_mflix");
-    var movie = {};
+    let movie = {};
     switch (req.method) {
         case "GET":
             movie = await db.collection("movies").findOne({ _id : new ObjectId(idMovie) });
