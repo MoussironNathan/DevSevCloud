@@ -37,7 +37,3 @@ npm run dev
 Ce projet a été réalisé en javascript avec le framework next.js. Il est connecté à une base données MongoDB.
 Un swagger a été mis en place avec la librairie "swagger-ui".
 
-## Conception
-
-Ce projet d'api a été conçue avec une architecture 
-
